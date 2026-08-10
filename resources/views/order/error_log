@@ -1,0 +1,1 @@
+[13-Jun-2018 18:56:09 Asia/Jakarta] PHP Fatal error:  Call to a member function format() on boolean in /home/cpnr8955/public_html/app/resources/views/order/detail.blade.php on line 39

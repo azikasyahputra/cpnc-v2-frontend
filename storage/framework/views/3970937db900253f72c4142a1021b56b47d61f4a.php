@@ -1,0 +1,1042 @@
+<?php $__env->startSection('breadcumbs'); ?>
+
+  <div class="breadcrumbs">
+
+      <div class="breadcrumbs-inner">
+
+          <div class="row m-0">
+
+              <div class="col-sm-4">
+
+                  <div class="page-header float-start">
+
+                      <div class="page-title">
+
+                          <h1>Edit Pengeluaran</h1>
+
+                      </div>
+
+                  </div>
+
+              </div>
+
+              <div class="col-sm-8">
+
+                  <div class="page-header float-end">
+
+                      <div class="page-title">
+
+                          <ol class="breadcrumb text-end">
+
+                              <li><a href="#">Pengeluaran</a></li>
+
+                              <li><a href="<?php echo e(URL::route('pengeluaran')); ?>">Semua Pengeluaran</a></li>
+
+                              <li class="active">Edit Pengeluaran</li>
+
+                          </ol>
+
+                      </div>
+
+                  </div>
+
+              </div>
+
+          </div>
+
+      </div>
+
+    </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+<div class="col-md-12 col-sm-12 col-12">
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div id="order">
+
+                <div class="card-body">
+
+                    <form action="<?php echo e(URL::route('pengeluaransaveedit')); ?>" method="post">
+
+                        <?php echo e(csrf_field()); ?>
+
+
+                        <?php $__currentLoopData = $header; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $header): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                        <input type="hidden" name="id_pengeluaran" value="<?php echo e($header->id_pengeluaran); ?>">
+
+                        <div class="row">
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+
+                                <div class="row">
+
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mb-3 ">
+
+                                        <label>Kepada Yth,</label>
+
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 mb-3 ">
+
+                                        <label>JAKARTA, </label>
+
+                                        
+
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4 mb-3 ">
+
+                                        <input type="text" id="tanggal_order" class="form-control" name="tanggal_order" readonly />
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="row">
+
+                                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 mb-3 ">
+
+                                        <label for="nama_client">Nama </label>  
+
+                                    </div>   
+
+                                    <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8 mb-3 "> 
+
+                                        <input type="text" id="nama_client" class="form-control" name="nama_client" value="<?php echo e($header->nama_client); ?>" readonly />
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="row">
+
+                                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 mb-3 ">
+
+                                        <label for="alamat_client">Alamat </label>  
+
+                                    </div>   
+
+                                    <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8 mb-3 "> 
+
+                                        <input type="text" id="alamat_client" class="form-control" name="alamat_client" value="<?php echo e($header->nama_client); ?> <?php echo e($header->kodepos_client); ?>" readonly />
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="row">
+
+                                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 mb-3 ">
+
+                                        <label for="kota_client">Kota </label>  
+
+                                    </div>   
+
+                                    <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8 mb-3 "> 
+
+                                        <input type="text" id="kota_client" class="form-control" name="kota_client" value="<?php echo e($header->kota_client); ?>" readonly />
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+
+                                <div class="row">
+
+                                <?php $option2='';$option3='';$option4='';?>
+
+                                <?php $__currentLoopData = $referensi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $referensi): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                    <?php
+
+                                        if($header->id_pendapatan==e($referensi->id_referensi)){
+
+                                        $option2 .= '<option value="'.e($referensi->id_referensi).' " selected>'.e($referensi->kode_referensi).'</option>';
+
+                                        }else{
+
+                                        $option2 .= '<option value="'.e($referensi->id_referensi).'">'.e($referensi->kode_referensi).'</option>';
+
+                                        }
+
+                                        
+
+                                        if($header->id_piutang==e($referensi->id_referensi)){
+
+                                        $option3 .= '<option value="'.e($referensi->id_referensi).'" selected>'.e($referensi->kode_referensi).'</option>';
+
+                                        }else{
+
+                                        $option3 .= '<option value="'.e($referensi->id_referensi).'">'.e($referensi->kode_referensi).'</option>';
+
+                                        }
+
+                                        
+
+                                        if($header->id_kas==e($referensi->id_referensi)){
+
+                                        $option4 .= '<option value="'.e($referensi->id_referensi).' " selected>'.e($referensi->kode_referensi).'</option>';
+
+                                        }else{
+
+                                        $option4 .= '<option value="'.e($referensi->id_referensi).'">'.e($referensi->kode_referensi).'</option>';
+
+                                        }        
+
+                                    ?>
+
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 mb-3 ">
+
+                                        <label for="pendapatan">Pendapatan </label>  
+
+                                    </div>   
+
+                                    <div class="col-lg-5 col-md-4 col-sm-4 col-xs-4 mb-3 "> 
+
+                                        <select id="kode_pendapatan" name="kode_pendapatan" class="form-control" required>
+
+                                        <?php echo $option2; ?>
+
+
+                                        </select>
+
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mb-3 "> 
+
+                                        <input type="text" id="pendapatan" class="form-control text-end" name="pendapatan" value="<?php echo e($header->pendapatan); ?>" required />
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 mb-3 ">
+
+                                        <label for="piutang">Piutang </label>  
+
+                                    </div>   
+
+                                    <div class="col-lg-5 col-md-4 col-sm-4 col-xs-4 mb-3 "> 
+
+                                        <select id="kode_piutang" name="kode_piutang" class="form-control" required>
+
+                                            <?php echo $option3; ?>
+
+
+                                        </select>
+
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mb-3 "> 
+
+                                        <input type="text" id="piutang" class="form-control text-end" name="piutang" value="<?php echo e($header->piutang); ?>" required />
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 mb-3 ">
+
+                                        <label for="kas">Kas </label>  
+
+                                    </div>   
+
+                                    <div class="col-lg-5 col-md-4 col-sm-4 col-xs-4 mb-3 "> 
+
+                                        <select id="kode_kas" name="kode_kas" class="form-control" required>
+
+                                        <?php echo $option4; ?>
+
+
+                                        </select>
+
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mb-3 "> 
+
+                                        <input type="text" id="kas" class="form-control text-end" name="kas" value="<?php echo e($header->kas); ?>" required />
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="row">
+
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+
+                                <div class="row">
+
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2 mb-3 ">
+
+                                        <label>INV NO</label>
+
+                                    </div>
+
+                                    <div class="col-lg-9 col-md-4 col-sm-4 col-xs-4 mb-3 ">
+
+                                        <input type="text" class="form-control" value="<?php echo e($header->no_invoice); ?>" readonly/>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+
+                                <div class="row">
+
+                                    <div class="col-lg-5 col-md-2 col-sm-2 col-xs-2 mb-3 ">
+
+                                        <input type="text" id="no_bl" class="form-control" name="no_bl" value="<?php echo e($header->kode_jenis_invoice); ?>" readonly />
+
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4 mb-3 ">
+
+                                        <input type="text" id="no_bl" class="form-control" name="no_bl" value="<?php echo e($header->no_bl); ?>" readonly />
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+
+                            <table class="table-bordered">
+
+                                <thead>
+
+                                    <tr style="text-align:center;">
+
+                                        <td>
+
+                                            <label for="ex_kapal">EX KAPAL</label>
+
+                                        </td>
+
+                                        <td>
+
+                                            <label for="pel_tujuan_negara_asal">PEL.TUJUAN NEGARA ASAL</label>
+
+                                        </td>
+
+                                        <td>
+
+                                            <label for="pelayaran">PELAYARAN</label>
+
+                                        </td>
+
+                                        <td>
+
+                                            <label for="berangkat_tiba">BERANGKAT TIBA</label>
+
+                                        </td>
+
+                                        <td>
+
+                                            <label for="banyaknya_kemasan">BANYAKNYA KEMASAN</label>
+
+                                        </td>
+
+                                        <td>
+
+                                            <label for="nama_barang">NAMA BARANG</label>
+
+                                        </td>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+
+                                        <td>
+
+                                            <input type="text" id="ex_kapal" class="form-control" name="ex_kapal" value="<?php echo e($header->nama_kapal_pesawat); ?>" readonly />
+
+                                        </td>
+
+                                        <td>
+
+                                            <input type="text" id="pel_tujuan_negara_asal" class="form-control" name="pel_tujuan_negara_asal" value="<?php echo e($header->negara_asal_tujuan); ?>" readonly />
+
+                                        </td>
+
+                                        <td>
+
+                                            <input type="text" id="pelayaran" class="form-control" name="pelayaran" value="<?php echo e($header->nama_pelayaran); ?>" readonly />
+
+                                        </td>
+
+                                        <td>
+
+                                            <input type="text" id="berangkat_tiba" class="form-control" name="berangkat_tiba" value="<?php echo e($header->tanggal_berangkat); ?>" readonly />
+
+                                        </td>
+
+                                        <td>
+
+                                            <input type="text" id="banyaknya_kemasan" class="form-control" name="banyaknya_kemasan" value="<?php echo e($header->nama_kemasan); ?>" readonly />
+
+                                        </td>
+
+                                        <td>
+
+                                            <input type="text" id="nama_barang" class="form-control" name="nama_barang" value="<?php echo e($header->nama_barang); ?>" readonly />
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+
+                            <table class="table-bordered">
+
+                                <thead>
+
+                                    <tr style="text-align:center;">
+
+                                        <td>
+
+                                            <label for="no_kwitansi">KWITANSI NO</label>
+
+                                        </td>
+
+                                        <td colspan="2">
+
+                                            <label for="export_import">EXPORT IMPORT</label>
+
+                                        </td>
+
+                                        <td>
+
+                                            <label for="keterangan">KETERANGAN</label>
+
+                                        </td>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                <tbody>
+
+                                    <?php $no=1; ?>
+
+                                    <?php $__currentLoopData = $detail; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $detaildata): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                    <tr>
+
+                                    <input type="hidden" name="id_pengeluaran_dt_<?php echo e($no); ?>" value="<?php echo e($detaildata->id_pengeluaran_dt); ?>" />
+
+                                        <td>
+
+                                            <input type="text" id="no_kwitansi" class="form-control" name="no_kwitansi_<?php echo e($no); ?>" value="<?php echo e($detaildata->no_kwitansi); ?>"/>
+
+                                        </td>
+
+                                        <td style="width:520px">
+
+                                            <select id="biaya_<?php echo e($no); ?>" name="biaya_<?php echo e($no); ?>" class="selectkas form-control">
+
+                                                <option value="kosong">-</option>
+
+                                                <?php $__currentLoopData = $biayadetail; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $biaya2): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                                    <?php if($detaildata->id_biaya_detail==$biaya2->id_biaya): ?>
+
+                                                    <option value="<?php echo e($biaya2->id_biaya); ?>" selected><?php echo e($biaya2->nama_biaya); ?></option>
+
+                                                    <?php else: ?>
+
+                                                    <option value="<?php echo e($biaya2->id_biaya); ?>"><?php echo e($biaya2->nama_biaya); ?></option>
+
+                                                    <?php endif; ?>
+
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                            </select>
+
+                                        </td>
+
+                                        <td>
+
+                                            <input type="text" id="jumlah_biaya_<?php echo e($no); ?>" class="cost form-control text-end" name="jumlah_biaya_<?php echo e($no); ?>" value="<?php echo e($detaildata->biaya_detail); ?>"/>
+
+                                        </td>
+
+                                        <td>
+
+                                            <input type="text" id="keterangan_<?php echo e($no); ?>" class="form-control" name="keterangan_<?php echo e($no); ?>" value="<?php echo e($detaildata->keterangan); ?>"/>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <?php $no++;?>
+
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                    <?php $i=$detailcount+1; ?>
+
+                                    <?php while($i<16): ?>
+
+                                    <tr>
+
+                                        <td>
+
+                                            <input type="text" id="no_kwitansi" class="form-control" name="no_kwitansi_<?php echo e($i); ?>" />
+
+                                        </td>
+
+                                        <td style="width:520px">
+
+                                            <select id="biaya_<?php echo e($i); ?>" name="biaya_<?php echo e($i); ?>" class="selectkas form-control">
+
+                                                <option value="kosong" selected>-</option>
+
+                                                <?php $__currentLoopData = $biayadetail; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $biaya2): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                                    <option value="<?php echo e($biaya2->id_biaya); ?>"><?php echo e($biaya2->nama_biaya); ?></option>
+
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                            </select>
+
+                                        </td>
+
+                                        <td>
+
+                                            <input type="text" id="jumlah_biaya_<?php echo e($i); ?>" class="cost form-control text-end" name="jumlah_biaya_<?php echo e($i); ?>" />
+
+                                        </td>
+
+                                        <td>
+
+                                            <input type="text" id="keterangan_<?php echo e($i); ?>" class="form-control" name="keterangan_<?php echo e($i); ?>" />
+
+                                        </td>
+
+                                    </tr>
+
+                                    <?php $i++;?>
+
+                                    <?php endwhile; ?>
+
+                                    <tr>
+
+                                        <td colspan="2" style="text-align:right;border:0px!important;">JUMLAH </td>
+
+                                        <td><input type="text" id="sum" class="form-control" name="jumlah_pendapatan text-end" value="<?php echo e($header->jumlah_biaya); ?>" required /></td>
+
+                                        <td><input type="text" id="keterangan" class="form-control" name="keterangan_pendapatan" value="<?php echo e($header->keterangan_jumlah_biaya); ?>"/></td>
+
+                                    </tr>
+
+                            </table>
+
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 mb-3 ">
+
+                                <label for="terbilang">Terbilang :</label>
+
+                            </div>
+
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 mb-3 ">
+
+                                <input type="text" id="terbilang" class="form-control" name="terbilang" value="<?php echo e($header->biaya_terbilang); ?>" required />
+
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 col-12 mb-3 ">
+
+                                <br>
+
+                                <a href="<?php echo e(URL::route('pengeluaran')); ?>" class="btn btn-danger">Batal</a>
+
+                                <input type="submit" value="Simpan" class="btn btn-primary">
+
+                            </div>  
+
+                        </div>
+
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('jscript'); ?>
+
+<script>
+
+    $(document).ready(function() {
+
+    $('.selectkas').select2();
+
+});
+
+</script>
+
+<script>
+
+    $(document).ready(function(){
+
+	$(".cost").each(
+
+		function(){
+
+		$(this).keyup(
+
+			function(){
+
+			calculateSum()
+
+				});
+
+			});
+
+		});
+
+			
+
+		function calculateSum(){
+
+			var sum=0;
+
+			$(".cost").each(
+
+			function(){
+
+                console.log(this.value);
+
+                var vl = this.value.split(',').join('');
+
+                console.log('Replaced: ' + vl);
+
+				if(!isNaN(vl) && vl.length!=0){
+
+					sum+=parseFloat(vl);
+
+					}
+
+				});	
+
+            
+
+			$("#sum").val(sum.toFixed(0));
+
+            $("#pendapatan").val(sum.toFixed(0));
+
+            $("#piutang").val(sum.toFixed(0));
+
+            ubah(sum.toFixed(0));
+
+			}
+
+
+
+$(document).ready(function(){
+
+  $('input.cost').keyup(function(event){
+
+      // skip for arrow keys
+
+      if(event.which >= 37 && event.which <= 40){
+
+          event.preventDefault();
+
+      }
+
+      var $this = $(this);
+
+      var num = $this.val().replace(/,/gi, "").split("").reverse().join("");
+
+      
+
+      var num2 = RemoveRougeChar(num.replace(/(.{3})/g,"$1,").split("").reverse().join(""));
+
+      
+
+      console.log(num2);
+
+      
+
+      
+
+      // the following line has been simplified. Revision history contains original.
+
+      $this.val(num2);
+
+  });
+
+});
+
+
+
+function RemoveRougeChar(convertString){
+
+    
+
+    
+
+    if(convertString.substring(0,1) == ","){
+
+        
+
+        return convertString.substring(1, convertString.length)            
+
+        
+
+    }
+
+    return convertString;
+
+    
+
+}
+
+</script>
+
+<script type="text/javascript">
+
+var now = moment();
+
+$(function() {
+
+    $('input[name="tanggal_order"]').daterangepicker({
+
+        singleDatePicker: true,
+
+        showDropdowns: true,
+
+        minDate: now,
+
+    });
+
+});
+
+$(function() {
+
+    $('input[name="tanggal_kapal_pesawat"]').daterangepicker({
+
+        singleDatePicker: true,
+
+        showDropdowns: true,
+
+        minDate: now,
+
+    });
+
+});
+
+$(function() {
+
+    $('input[name="tanggal_status"]').daterangepicker({
+
+        singleDatePicker: true,
+
+        showDropdowns: true,
+
+        minDate: now,
+
+    });
+
+});
+
+</script>
+
+<script>
+
+var daftarAngka=new Array("","SATU","DUA","TIGA","EMPAT","LIMA","ENAM","TUJUH","DELAPAN","SEMBILAN");
+
+function terbilang(nilai){
+
+var temp='';
+
+var hasilBagi,sisaBagi;
+
+//batas untuk ribuan
+
+var batas=3;
+
+//untuk menentukan ukuran array, jumlahnya sesuaikan dengan jumlah anggota dari array gradeNilai[]
+
+var maxBagian = 5;
+
+var gradeNilai=new Array("","RIBU","JUTA","MILYAR","TRILIUN");
+
+//cek apakah ada angka 0 didepan ==> 00098, harus diubah menjadi 98
+
+nilai = this.hapusNolDiDepan(nilai);
+
+var nilaiTemp = ubahStringKeArray(batas, maxBagian, nilai);
+
+//ubah menjadi bentuk terbilang
+
+var j = nilai.length;
+
+//menentukan batas array
+
+var banyakBagian = (j % batas) == 0 ? (j / batas) : Math.round(j / batas + 0.5);
+
+var h=0;
+
+    for(var i = banyakBagian - 1; i >=0; i-- ){
+
+        var nilaiSementara = parseInt(nilaiTemp[h]);
+
+        if (nilaiSementara == 1 && i == 1){ 
+
+            temp +="SERIBU ";
+
+            }
+
+        else {
+
+            temp +=this.ubahRatusanKeHuruf(nilaiTemp[h])+" ";
+
+// cek apakah string bernilai 000, maka jangan tambahkan gradeNilai[i]
+
+            if(nilaiTemp[h] != "000"){
+
+                temp += gradeNilai[i]+" ";
+
+                }
+
+            }
+
+        h++;
+
+        }
+
+return temp;
+
+}
+
+function ubahStringKeArray(batas, maxBagian,kata){
+
+// maksimal 999 milyar
+
+var temp= new Array(maxBagian);
+
+var j = kata.length;
+
+//menentukan batas array
+
+var banyakBagian = (j % batas) == 0 ? (j / batas) : Math.round(j / batas + 0.5);
+
+    for(var i = banyakBagian - 1; i >= 0 ; i--){ 
+
+        var k = j - batas;
+
+        if(k < 0) k = 0;
+
+            temp[i]=kata.substring(k,j);
+
+        j = k ;
+
+        if (j == 0)
+
+        break;
+
+        }
+
+ return temp;
+
+ }
+
+ 
+
+ function ubahRatusanKeHuruf(nilai){ 
+
+//maksimal 3 karakter 
+
+var batas = 2;
+
+//membagi string menjadi 2 bagian, misal 123 ==> 1 dan 23
+
+var maxBagian = 2;
+
+var temp = this.ubahStringKeArray(batas, maxBagian, nilai);
+
+var j = nilai.length;
+
+var hasil="";
+
+//menentukan batas array
+
+var banyakBagian = (j % batas) == 0 ? (j / batas) : Math.round(j / batas + 0.5);
+
+    for(var i = 0; i < banyakBagian ;i++){
+
+//cek string yang memiliki panjang lebih dari satu ==> belasan atau puluhan
+
+        if(temp[i].length > 1){
+
+//cek untuk yang bernilai belasan ==> angka pertama 1 dan angka kedua 0 - 9, seperti 11,16 dst
+
+            if(temp[i].charAt(0) == '1'){
+
+                if(temp[i].charAt(1) == '1') {
+
+                    hasil += "SEBELAS";
+
+                    }
+
+                else if(temp[i].charAt(1) == '0') {
+
+                    hasil += "SEPULUH";
+
+                    }
+
+            else hasil += daftarAngka[temp[i].charAt(1) - '0']+ " BELAS ";
+
+                }
+
+ //cek untuk string dengan format angka  pertama 0 ==> 09,05 dst
+
+            else if(temp[i].charAt(0) == '0'){
+
+            hasil += daftarAngka[temp[i].charAt(1) - '0'] ;
+
+            }
+
+ //cek string dengan format selain angka pertama 0 atau 1
+
+            else 
+
+            hasil += daftarAngka[temp[i].charAt(0) - '0']+ " PULUH " +daftarAngka[temp[i].charAt(1) - '0'] ;
+
+            }
+
+        else {
+
+//cek string yang memiliki panjang = 1 dan berada pada posisi ratusan
+
+            if(i == 0 && banyakBagian !=1){
+
+                if (temp[i].charAt(0) == '1') 
+
+                    hasil+=" SERATUS ";
+
+                else if (temp[i].charAt(0) == '0')
+
+                    hasil+=" ";
+
+                else hasil+= daftarAngka[parseInt(temp[i])]+" RATUS ";
+
+            }
+
+//string dengan panjang satu dan tidak berada pada posisi ratusan ==> satuan
+
+            else hasil+= daftarAngka[parseInt(temp[i])];
+
+            }
+
+    }
+
+return hasil;
+
+}
+
+function hapusNolDiDepan(nilai){
+
+while(nilai.indexOf("0") == 0){
+
+    nilai = nilai.substring(1, nilai.length);
+
+    }
+
+return nilai;
+
+}
+
+</script>
+
+<script type="text/javascript">
+
+ function ubah(nilai){
+
+ var hasil = terbilang(nilai);
+
+ $("#terbilang").val(hasil);
+
+ }
+
+</script>
+
+<script>
+
+  document.addEventListener("DOMContentLoaded",function(event){
+
+    var element = document.getElementById("pengeluaran");
+
+    element.classList.add("active");
+
+  });
+
+</script>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.main_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/azikasyahputra/Documents/Independent/cpnc/resources/views/pengeluaran/edit.blade.php ENDPATH**/ ?>

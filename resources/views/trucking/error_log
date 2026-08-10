@@ -1,0 +1,2 @@
+[15-Jul-2018 09:24:12 Asia/Jakarta] PHP Fatal error:  Call to a member function format() on boolean in /home/cpnr8955/public_html/app/resources/views/trucking/edit.blade.php on line 23
+[15-Jul-2018 11:40:57 Asia/Jakarta] PHP Fatal error:  Call to a member function format() on boolean in /home/cpnr8955/public_html/app/resources/views/trucking/detail.blade.php on line 22

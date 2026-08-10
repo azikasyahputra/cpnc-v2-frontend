@@ -1,0 +1,15 @@
+/* CPNC customisations over the Sneat (Bootstrap 5) template */
+
+/* Solid, readable text (override the grey Sneat body colour) */
+body { color: #111 !important; }
+p, span, small, div, li { color: #111 !important; }
+.table, .table tbody, .table td, .table th { color: #111 !important; }
+.table thead th.text-white, .table thead th.text-white a { color: #fff !important; }
+h1, h2, h3, h4, h5, h6, .page-header .page-title h1 { color: #000 !important; }
+.fw-bold, .fw-semibold, .card-title { color: #111 !important; }
+.form-label, label, .form-control, .form-select { color: #111 !important; }
+.card-footer { text-align: right; }
+.btn + .btn { margin-left: 0.5rem; }
+.text-muted { color: #3a3d42 !important; }
+.menu-link, .menu-header-text, .menu-item a { color: #222 !important; }
+.menu-item.active .menu-link, .menu-item.open .menu-link { color: #4b6bfb !important; }
