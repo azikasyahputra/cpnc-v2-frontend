@@ -35,14 +35,14 @@
 
         /* ===== Fixed sections on the preprinted form ===== */
         .alamat-pelanggan { position: absolute; top: 0;   left: 0; right: 0; }
-        .no-invoice       { position: absolute; top: 130px;  left: 0; right: 0; }
-        .detail-pelanggan { position: absolute; top: 240px;  left: 0; right: 0; }
-        .bl-no            { position: absolute; top: 260px;  left: 0; right: 0; }
-        .detail-invoice   { position: absolute; top: 350px;  left: 0; right: 0; }
-        .total            { position: absolute; bottom: 220px; left: 0; right: 0; text-align: center; }
-        .terbilang        { position: absolute; bottom: 130px;  left: 0; right: 0; text-align: center; line-height: 1.8; }
-        .tanggal          { position: absolute; bottom: 100px;  left: 0; right: 0; text-align: center; }
-        .footer           { position: absolute; bottom: 0;left: 0; right: 0; text-align: center; }
+        .no-invoice       { position: absolute; top: 195px;  left: 0; right: 0; }
+        .detail-pelanggan { position: absolute; top: 305px;  left: 0; right: 0; }
+        .bl-no            { position: absolute; top: 340px;  left: 0; right: 0; }
+        .detail-invoice   { position: absolute; top: 434px;  left: 0; right: 0; }
+        .total            { position: absolute; bottom: 257px; left: 0; right: 0; text-align: center; }
+        .terbilang        { position: absolute; bottom: 183px;  left: 0; right: 0; text-align: center; line-height: 1.8; }
+        .tanggal          { position: absolute; bottom: 137px;  left: 0; right: 0; text-align: center; }
+        .footer           { position: absolute; bottom: 27px; left: 0; right: 0; text-align: center; }
     </style>
 </head>
 <body>
@@ -68,8 +68,7 @@
             <tr>
                 <td>&nbsp;</td>
                 <td align="center" style="width:55%;">
-                    <h3>&nbsp;</h3>
-                    <p style="text-transform:uppercase;">
+                    <p style="margin:0;text-transform:uppercase;">
                         {{ $inv->nama_client }}<br>
                         {{ $inv->alamat_client }}<br>
                         {{ $inv->kota_client }}

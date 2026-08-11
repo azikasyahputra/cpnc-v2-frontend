@@ -31,27 +31,34 @@ class InvoiceFpdf extends Fpdf
     /** @var \Illuminate\Support\Collection */
     protected $referensi;
 
-    // Table geometry (mm), measured from dompdf output.
-    const TABLE_LEFT = 4.50;
-    const TABLE_WIDTH = 203.28;
-    const TABLE_RIGHT = 207.78;
+    // Table geometry (mm), measured on a full-width A4 form (0-210mm).
+    const TABLE_LEFT = 0.52;
+    const TABLE_WIDTH = 210.0;
+    const TABLE_RIGHT = 210.0;
 
     // Detail table columns (mm).
-    const COL1_X = 4.50;        // no kwitansi
-    const COL2_X = 48.80;       // nama biaya
-    const COL3_RIGHT = 150.08;  // biaya detail (right aligned)
-    const COL4_X = 152.98;      // keterangan
+    const COL1_X = 0.52;        // no kwitansi
+    const COL2_X = 46.13;       // nama biaya
+    const COL3_RIGHT = 150.73;  // biaya detail (right aligned)
+    const COL4_X = 153.62;      // keterangan
+
+    // Tanggal / footer / terbilang text positions (mm).
+    const X_TANGGAL = 147.00;
+    const X_TERBILANG = 111.30;
+    const W_TERBILANG = 98.70;
 
     // Baselines (mm from page top).
-    const BASELINE_NO_INVOICE = 63.77;
-    const BASELINE_BL_NO = 98.16;
-    const BASELINE_DETAIL_ROW1 = 127.03;
-    const DETAIL_ROW_STEP = 5.05;
-    const BASELINE_TOTAL = 217.42;
-    const BASELINE_TERBILANG = 233.98;
-    const TERBILANG_STEP = 6.78;
-    const BASELINE_TANGGAL = 249.11;
-    const BASELINE_FOOTER = 278.21;
+    const BASELINE_NO_INVOICE = 51.66;
+    const BASELINE_DETAIL_PELANGGAN1 = 80.76;
+    const BASELINE_DETAIL_PELANGGAN2 = 86.05;
+    const BASELINE_BL_NO = 87.37;
+    const BASELINE_DETAIL_ROW1 = 114.74;
+    const DETAIL_ROW_STEP = 4.92;
+    const BASELINE_TOTAL = 229.08;
+    const BASELINE_TERBILANG = 248.69;
+    const TERBILANG_STEP = 4.37;
+    const BASELINE_TANGGAL = 260.84;
+    const BASELINE_FOOTER = 289.93;
 
     public function __construct(array $data)
     {
@@ -158,7 +165,7 @@ class InvoiceFpdf extends Fpdf
     {
         $inv = $this->inv;
         $center = 151.30;
-        $baseline = 35.39;
+        $baseline = 18.00;
         $step = 4.52;
         $wrapWidth = 88.70;
 
@@ -180,7 +187,7 @@ class InvoiceFpdf extends Fpdf
 
     protected function renderNoInvoice()
     {
-        $this->textAt(4.50 + 0.18 * self::TABLE_WIDTH, self::BASELINE_NO_INVOICE, (string) $this->inv->no_invoice);
+        $this->textAt(self::TABLE_LEFT + 0.18 * self::TABLE_WIDTH, self::BASELINE_NO_INVOICE, (string) $this->inv->no_invoice);
     }
 
     protected function renderDetailPelanggan()
@@ -195,28 +202,35 @@ class InvoiceFpdf extends Fpdf
             strtoupper((string) $inv->nama_barang),
         ];
 
-        $colWidth = self::TABLE_WIDTH / 6;
-        $line1 = 92.87;
-        $line2 = 97.39;
-        $center = 95.13;
+        $line1 = self::BASELINE_DETAIL_PELANGGAN1;
+        $line2 = self::BASELINE_DETAIL_PELANGGAN2;
+        $center = ($line1 + $line2) / 2;
 
+        $widths = array_map(function ($text) {
+            return $this->GetStringWidth($text);
+        }, $cols);
+        $totalWidth = array_sum($widths);
+
+        $x = self::TABLE_LEFT;
         foreach ($cols as $i => $text) {
-            $cx = self::TABLE_LEFT + $colWidth * ($i + 0.5);
-            $wrapWidth = $colWidth - 2.0;
-            if ($text === '') {
-                continue;
+            $colW = $totalWidth > 0
+                ? $widths[$i] / $totalWidth * self::TABLE_WIDTH
+                : self::TABLE_WIDTH / 6;
+            $cx = $x + $colW / 2;
+            if ($text !== '') {
+                if ($widths[$i] <= $colW) {
+                    $this->textCenterAt($cx, $center, $text);
+                } else {
+                    $this->wrapText($cx, $colW, $line1, $line2 - $line1, $text, 'center');
+                }
             }
-            if ($this->GetStringWidth($text) <= $wrapWidth) {
-                $this->textCenterAt($cx, $center, $text);
-            } else {
-                $this->wrapText($cx, $wrapWidth, $line1, $line2 - $line1, $text, 'center');
-            }
+            $x += $colW;
         }
     }
 
     protected function renderBlNo()
     {
-        $x26 = 4.50 + 0.26 * self::TABLE_WIDTH;
+        $x26 = self::TABLE_LEFT + 0.26 * self::TABLE_WIDTH;
         $this->textRightAt($x26, self::BASELINE_BL_NO, (string) $this->inv->kode_jenis_invoice);
         $this->textAt($x26 + 1.95, self::BASELINE_BL_NO, (string) $this->inv->no_bl);
     }
@@ -242,19 +256,17 @@ class InvoiceFpdf extends Fpdf
 
     protected function renderTerbilang()
     {
-        $x = 4.50 + 0.53 * self::TABLE_WIDTH;
-        $width = 0.47 * self::TABLE_WIDTH;
-        $this->wrapText($x, $width, self::BASELINE_TERBILANG, self::TERBILANG_STEP, strtoupper((string) $this->inv->biaya_terbilang));
+        $this->wrapText(self::X_TERBILANG, self::W_TERBILANG, self::BASELINE_TERBILANG, self::TERBILANG_STEP, strtoupper((string) $this->inv->biaya_terbilang));
     }
 
     protected function renderTanggal()
     {
-        $this->textAt(4.50 + 0.70 * self::TABLE_WIDTH, self::BASELINE_TANGGAL, $this->formatTanggal($this->inv->tanggal_invoice));
+        $this->textAt(self::X_TANGGAL, self::BASELINE_TANGGAL, $this->formatTanggal($this->inv->tanggal_invoice));
     }
 
     protected function renderFooter()
     {
-        $this->textAt(4.50 + 0.70 * self::TABLE_WIDTH, self::BASELINE_FOOTER, 'YOPPY. B');
+        $this->textAt(self::X_TANGGAL, self::BASELINE_FOOTER, 'YOPPY. B');
     }
 
     protected function wrap(string $str, float $width): array

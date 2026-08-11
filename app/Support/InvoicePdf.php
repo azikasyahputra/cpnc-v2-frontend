@@ -10,38 +10,38 @@ namespace App\Support;
  */
 class InvoicePdf extends PdfDocument
 {
-    // Table geometry (mm).
-    const TABLE_LEFT = 4.50;
-    const TABLE_WIDTH = 203.28;
-    const TABLE_RIGHT = 207.78;
+    // Table geometry (mm), measured on a full-width A4 form (0-210mm).
+    const TABLE_LEFT = 0.52;
+    const TABLE_WIDTH = 210.0;
+    const TABLE_RIGHT = 210.0;
 
     // Detail table columns (mm).
-    const COL1_X = 4.50;        // no kwitansi
-    const COL2_X = 48.80;       // nama biaya
-    const COL3_RIGHT = 150.08;  // biaya detail (right aligned)
-    const COL4_X = 152.98;      // keterangan
+    const COL1_X = 0.52;        // no kwitansi
+    const COL2_X = 46.13;       // nama biaya
+    const COL3_RIGHT = 150.73;  // biaya detail (right aligned)
+    const COL4_X = 153.62;      // keterangan
 
-    // Detail-pelanggan table (6 equal columns).
-    const DP_COL_WIDTH = 33.807; // 95.838pt
-    const DP_WRAP_WIDTH = 33.278; // col width minus 2px border-spacing
-    const DP_BL_NO_KODE_RIGHT = 56.71; // right edge of "BL NO"
-    const DP_BL_NO_X = 59.30;    // no BL text left edge
+    // Detail-pelanggan row (6 auto-layout columns, proportional to content).
+    const DP_BL_NO_KODE_RIGHT = 56.11; // right edge of kode (before no BL)
+    const DP_BL_NO_X = 57.11;    // no BL text left edge
 
     // Tanggal / footer / terbilang text positions (mm).
-    const X_TANGGAL = 146.50;
-    const X_TERBILANG = 112.03;
-    const W_TERBILANG = 95.52;
+    const X_TANGGAL = 147.00;
+    const X_TERBILANG = 111.30;
+    const W_TERBILANG = 98.70;
 
     // Baselines (mm from page top).
-    const BASELINE_NO_INVOICE = 63.77;
-    const BASELINE_BL_NO = 98.16;
-    const BASELINE_DETAIL_ROW1 = 127.03;
-    const DETAIL_ROW_STEP = 5.05;
-    const BASELINE_TOTAL = 217.42;
-    const BASELINE_TERBILANG = 233.98;
-    const TERBILANG_STEP = 6.78;
-    const BASELINE_TANGGAL = 249.11;
-    const BASELINE_FOOTER = 278.21;
+    const BASELINE_NO_INVOICE = 51.66;
+    const BASELINE_DETAIL_PELANGGAN1 = 80.76;
+    const BASELINE_DETAIL_PELANGGAN2 = 86.05;
+    const BASELINE_BL_NO = 87.37;
+    const BASELINE_DETAIL_ROW1 = 114.74;
+    const DETAIL_ROW_STEP = 4.92;
+    const BASELINE_TOTAL = 229.08;
+    const BASELINE_TERBILANG = 248.69;
+    const TERBILANG_STEP = 4.37;
+    const BASELINE_TANGGAL = 260.84;
+    const BASELINE_FOOTER = 289.93;
 
     /** @var object|null */
     protected $inv;
@@ -97,7 +97,7 @@ class InvoicePdf extends PdfDocument
     {
         $inv = $this->inv;
         $center = 151.30;
-        $baseline = 35.39;
+        $baseline = 18.00;
         $step = 4.52;
 
         $nama = strtoupper((string) $inv->nama_client);
@@ -117,7 +117,7 @@ class InvoicePdf extends PdfDocument
 
     protected function renderNoInvoice()
     {
-        $this->textAt(4.50 + 0.18 * self::TABLE_WIDTH, self::BASELINE_NO_INVOICE, (string) $this->inv->no_invoice);
+        $this->textAt(self::TABLE_LEFT + 0.18 * self::TABLE_WIDTH, self::BASELINE_NO_INVOICE, (string) $this->inv->no_invoice);
     }
 
     protected function renderDetailPelanggan()
@@ -132,21 +132,29 @@ class InvoicePdf extends PdfDocument
             strtoupper((string) $inv->nama_barang),
         ];
 
-        $line1 = 92.87;
-        $line2 = 97.39;
-        $center = 95.13;
+        $line1 = self::BASELINE_DETAIL_PELANGGAN1;
+        $line2 = self::BASELINE_DETAIL_PELANGGAN2;
+        $center = ($line1 + $line2) / 2;
 
+        $widths = array_map(function ($text) {
+            return $this->GetStringWidth($text);
+        }, $cols);
+        $totalWidth = array_sum($widths);
+
+        $x = self::TABLE_LEFT;
         foreach ($cols as $i => $text) {
-            $cx = 21.137 + self::DP_COL_WIDTH * $i;
-            $wrapWidth = self::DP_WRAP_WIDTH;
-            if ($text === '') {
-                continue;
+            $colW = $totalWidth > 0
+                ? $widths[$i] / $totalWidth * self::TABLE_WIDTH
+                : self::TABLE_WIDTH / 6;
+            $cx = $x + $colW / 2;
+            if ($text !== '') {
+                if ($widths[$i] <= $colW) {
+                    $this->textCenterAt($cx, $center, $text);
+                } else {
+                    $this->wrapText($cx, $colW, $line1, $line2 - $line1, $text, 'center');
+                }
             }
-            if ($this->GetStringWidth($text) <= $wrapWidth) {
-                $this->textCenterAt($cx, $center, $text);
-            } else {
-                $this->wrapText($cx, $wrapWidth, $line1, $line2 - $line1, $text, 'center');
-            }
+            $x += $colW;
         }
     }
 
