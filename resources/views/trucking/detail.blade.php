@@ -110,6 +110,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-12 mb-3 ">
+                      <a href="{{URL::route('truckingedit',['id'=>$data->id_order_trucking])}}" class="btn btn-warning">Edit</a>
                       <a href="{{URL::route('trucking')}}" class="btn btn-danger">Kembali</a>
                     </div>  
                 </div>

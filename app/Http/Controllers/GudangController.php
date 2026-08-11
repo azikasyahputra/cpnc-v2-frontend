@@ -24,8 +24,8 @@ class GudangController extends Controller
     public function save(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
-        ApiClient::post('gudang', $request->all());
-        return redirect()->route('gudang');
+        $payload = ApiClient::post('gudang', $request->all());
+        return redirect()->route('gudangedit', $payload['data']['id']);
     }
 
     public function edit($id)
@@ -40,7 +40,7 @@ class GudangController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         ApiClient::put('gudang/' . $request->input('id_gudang'), $request->all());
-        return redirect()->route('gudang');
+        return redirect()->route('gudangedit', $request->input('id_gudang'));
     }
 
     public function hapus($id)

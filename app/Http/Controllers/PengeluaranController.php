@@ -42,7 +42,7 @@ class PengeluaranController extends Controller
     public function saveedit(Request $request){
         date_default_timezone_set('Asia/Jakarta');
         ApiClient::put('pengeluaran/'.$request->input('id_pengeluaran'), $request->all());
-        return redirect()->route('pengeluaran');
+        return redirect()->route('pengeluarandetail', $request->input('id_pengeluaran'));
     }
     
     public function hapus($id){

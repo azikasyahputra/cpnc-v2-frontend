@@ -26,8 +26,8 @@ class BukuKasController extends Controller
     
     public function save(Request $request){
         date_default_timezone_set('Asia/Jakarta');
-        ApiClient::post('kas', $request->all());
-        return redirect()->route('kas');
+        $payload = ApiClient::post('kas', $request->all());
+        return redirect()->route('kasdetail', $payload['data']['id']);
     }
     
     public function detail($id){
@@ -52,7 +52,7 @@ class BukuKasController extends Controller
     public function saveedit(Request $request){
         date_default_timezone_set('Asia/Jakarta');
         ApiClient::put('kas/'.$request->input('id_kas'), $request->all());
-        return redirect()->route('kas');
+        return redirect()->route('kasdetail', $request->input('id_kas'));
     }
     
     public function hapus($id){

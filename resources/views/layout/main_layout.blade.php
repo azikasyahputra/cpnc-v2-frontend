@@ -148,7 +148,7 @@
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Trucking</span></li>
                     <li class="menu-item {{ request()->is('trucking*') ? 'open active' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-truck"></i>
+                            <i class="menu-icon tf-icons bx bxs-truck"></i>
                             <div data-i18n="Order Trucking">Order Trucking</div>
                         </a>
                         <ul class="menu-sub">

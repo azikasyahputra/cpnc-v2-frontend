@@ -116,6 +116,7 @@
                     </div>
                     <div class="col-md-12 col-sm-12 col-12 mb-3 ">
                       <br>
+                      <a href="{{URL::route('kasedit',['id'=>$dataheader->id_kas])}}" class="btn btn-warning">Edit</a>
                       <a href="{{URL::route('kasdownloadinvoice',['id'=>$dataheader->id_kas])}}" class="btn btn-success" target="_blank">Print</a>
                       <a href="{{URL::route('kas')}}" class="btn btn-danger">Kembali</a>
                     </div>  

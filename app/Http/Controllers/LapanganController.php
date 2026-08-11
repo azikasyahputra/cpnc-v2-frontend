@@ -24,8 +24,8 @@ class LapanganController extends Controller
     public function save(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
-        ApiClient::post('lapangan', $request->all());
-        return redirect()->route('lapangan');
+        $payload = ApiClient::post('lapangan', $request->all());
+        return redirect()->route('lapanganedit', $payload['data']['id']);
     }
 
     public function edit($id)
@@ -40,7 +40,7 @@ class LapanganController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         ApiClient::put('lapangan/' . $request->input('id_lapangan'), $request->all());
-        return redirect()->route('lapangan');
+        return redirect()->route('lapanganedit', $request->input('id_lapangan'));
     }
 
     public function hapus($id)

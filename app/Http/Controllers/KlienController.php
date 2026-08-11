@@ -24,8 +24,8 @@ class KlienController extends Controller
     public function save(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
-        ApiClient::post('klien', $request->all());
-        return redirect()->route('klien');
+        $payload = ApiClient::post('klien', $request->all());
+        return redirect()->route('klienedit', $payload['data']['id']);
     }
 
     public function edit($id)
@@ -40,7 +40,7 @@ class KlienController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         ApiClient::put('klien/' . $request->input('id_client'), $request->all());
-        return redirect()->route('klien');
+        return redirect()->route('klienedit', $request->input('id_client'));
     }
 
     public function hapus($id)

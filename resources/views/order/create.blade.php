@@ -166,7 +166,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-3 mt-1">
+            <div class="row mb-3 mt-4">
                 <div class="col-md-12 text-end">
                     <a href="{{URL::route('order')}}" class="btn btn-danger">Batal</a>
                     <input type="submit" value="Simpan" class="btn btn-primary">

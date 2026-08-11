@@ -133,8 +133,8 @@ class OrderController extends Controller
     
     public function save(Request $request){
         date_default_timezone_set('Asia/Jakarta');
-        ApiClient::post('order', $request->all());
-        return redirect()->route('order');
+        $payload = ApiClient::post('order', $request->all());
+        return redirect()->route('orderdetail', $payload['data']['id']);
     }
     
     public function edit($id){
@@ -158,7 +158,7 @@ class OrderController extends Controller
     public function saveedit(Request $request){
         date_default_timezone_set('Asia/Jakarta');
         ApiClient::put('order/'.$request->input('id_order'), $request->all());
-        return redirect()->route('order');
+        return redirect()->route('orderdetail', $request->input('id_order'));
     }
     
     public function hapus($id){

@@ -146,8 +146,8 @@ class InvoiceController extends Controller
     
     public function save(Request $request){
         date_default_timezone_set('Asia/Jakarta');
-        ApiClient::post('invoice', $request->all());
-        return redirect()->route('invoice');
+        $payload = ApiClient::post('invoice', $request->all());
+        return redirect()->route('invoicedetail', $payload['data']['id']);
     }
     
     public function edit($id){
@@ -159,7 +159,7 @@ class InvoiceController extends Controller
     public function saveedit(Request $request){
         date_default_timezone_set('Asia/Jakarta');
         ApiClient::put('invoice/'.$request->input('id_invoice'), $request->all());
-        return redirect()->route('invoice');
+        return redirect()->route('invoicedetail', $request->input('id_invoice'));
     }
 
     public function lunas($id){

@@ -24,8 +24,8 @@ class JenisDokumenController extends Controller
     public function save(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
-        ApiClient::post('jenisdokumen', $request->all());
-        return redirect()->route('jenisdokumen');
+        $payload = ApiClient::post('jenisdokumen', $request->all());
+        return redirect()->route('jenisdokumenedit', $payload['data']['id']);
     }
 
     public function edit($id)
@@ -40,7 +40,7 @@ class JenisDokumenController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         ApiClient::put('jenisdokumen/' . $request->input('id_jenis_dokumen'), $request->all());
-        return redirect()->route('jenisdokumen');
+        return redirect()->route('jenisdokumenedit', $request->input('id_jenis_dokumen'));
     }
 
     public function hapus($id)

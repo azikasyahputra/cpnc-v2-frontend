@@ -578,6 +578,8 @@
 
                                 <br>
 
+                                <a href="{{URL::route('pengeluaranedit',['id'=>$header->id_pengeluaran])}}" class="btn btn-warning">Edit</a>
+
                                 <a href="{{URL::route('pengeluaran')}}" class="btn btn-danger">Kembali</a>
 
                             </div>  

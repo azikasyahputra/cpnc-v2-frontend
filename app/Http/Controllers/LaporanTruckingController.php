@@ -25,7 +25,7 @@ class LaporanTruckingController extends Controller
         $tanggalawal = date('Y-m-d', strtotime($tanggal_awal));
         $tanggalakhir = date('Y-m-d', strtotime($tanggal_akhir));
         $nama = 'Laporan Piutang ' . $tanggal_awal . ' s.d ' . $tanggal_akhir;
-        $report = ApiClient::post('reports/trucking/piutang', ['tanggal_awal' => $tanggal_awal, 'tanggal_akhir' => $tanggal_akhir]);
+        $report = ApiClient::post('reports/trucking/piutang', ['tanggal_awal' => $tanggalawal, 'tanggal_akhir' => $tanggalakhir]);
         $d = $report['data'] ?? [];
         if (!empty($d['data'])) {
             switch ($download) {
@@ -60,7 +60,7 @@ class LaporanTruckingController extends Controller
         $download = $request->input('download');
         $tanggalawal = date('Y-m-d', strtotime($tanggal_awal));
         $tanggalakhir = date('Y-m-d', strtotime($tanggal_akhir));
-        $report = ApiClient::post('reports/trucking/tagihan-klien', ['tanggal_awal' => $tanggal_awal, 'tanggal_akhir' => $tanggal_akhir, 'id_client' => $id_client]);
+        $report = ApiClient::post('reports/trucking/tagihan-klien', ['tanggal_awal' => $tanggalawal, 'tanggal_akhir' => $tanggalakhir, 'id_client' => $id_client]);
         $d = $report['data'] ?? [];
         $namaclient = $d['namaclient'] ?? '';
         $nama = 'Laporan Tagihan ' . $namaclient . ' ' . $tanggal_awal . ' s.d ' . $tanggal_akhir;
@@ -103,7 +103,7 @@ class LaporanTruckingController extends Controller
         $tanggalawal = date('Y-m-d', strtotime($tanggal_awal));
         $tanggalakhir = date('Y-m-d', strtotime($tanggal_akhir));
         $nama = 'Laporan Rugi/Laba Trucking ' . $tanggal_awal . ' s.d ' . $tanggal_akhir;
-        $report = ApiClient::post('reports/trucking/rugi-laba', ['tanggal_awal' => $tanggal_awal, 'tanggal_akhir' => $tanggal_akhir]);
+        $report = ApiClient::post('reports/trucking/rugi-laba', ['tanggal_awal' => $tanggalawal, 'tanggal_akhir' => $tanggalakhir]);
         $d = $report['data'] ?? [];
         if (count($d['data'] ?? array()) > 1) {
             switch ($download) {
@@ -148,7 +148,7 @@ class LaporanTruckingController extends Controller
         $download = $request->input('download');
         $tanggalawal = date('Y-m-d', strtotime($tanggal_awal));
         $tanggalakhir = date('Y-m-d', strtotime($tanggal_akhir));
-        $report = ApiClient::post('reports/trucking/komisi-supir', ['tanggal_awal' => $tanggal_awal, 'tanggal_akhir' => $tanggal_akhir, 'id_supir' => $idsupir]);
+        $report = ApiClient::post('reports/trucking/komisi-supir', ['tanggal_awal' => $tanggalawal, 'tanggal_akhir' => $tanggalakhir, 'id_supir' => $idsupir]);
         $d = $report['data'] ?? [];
         $namasupir = $d['namasupir'] ?? '';
         $nama = 'Laporan Komisi Supir a/n ' . $namasupir . ' ' . $tanggal_awal . ' s.d ' . $tanggal_akhir;

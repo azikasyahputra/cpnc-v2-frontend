@@ -48,7 +48,7 @@ class LaporanKeuanganController extends Controller
         $tanggalawal = date('Y-m-d', strtotime($tanggal_awal));
 	    $tanggalakhir = date('Y-m-d', strtotime($tanggal_akhir));
         $nama = 'Laporan Neraca '.$tanggal_awal.' s.d '.$tanggal_akhir;
-        $report = ApiClient::post('reports/neraca', ['tanggal_awal' => $tanggal_awal, 'tanggal_akhir' => $tanggal_akhir]);
+        $report = ApiClient::post('reports/neraca', ['tanggal_awal' => $tanggalawal, 'tanggal_akhir' => $tanggalakhir]);
         $d = $report['data'] ?? [];
         switch($download){
             case 'Download Excel':
@@ -73,7 +73,7 @@ class LaporanKeuanganController extends Controller
         $tanggalawal = date('Y-m-d', strtotime($tanggal_awal));
 	    $tanggalakhir = date('Y-m-d', strtotime($tanggal_akhir));
         $nama = 'Laporan Rugi/Laba Keuangan '.$tanggal_awal.' s.d '.$tanggal_akhir;
-        $report = ApiClient::post('reports/rugi-laba-keuangan', ['tanggal_awal' => $tanggal_awal, 'tanggal_akhir' => $tanggal_akhir]);
+        $report = ApiClient::post('reports/rugi-laba-keuangan', ['tanggal_awal' => $tanggalawal, 'tanggal_akhir' => $tanggalakhir]);
         $d = $report['data'] ?? [];
         switch($download){
             case 'Download Excel':

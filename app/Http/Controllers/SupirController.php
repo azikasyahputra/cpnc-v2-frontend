@@ -24,8 +24,8 @@ class SupirController extends Controller
     public function save(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
-        ApiClient::post('supir', $request->all());
-        return redirect()->route('supir');
+        $payload = ApiClient::post('supir', $request->all());
+        return redirect()->route('supiredit', $payload['data']['id']);
     }
 
     public function edit($id)
@@ -40,7 +40,7 @@ class SupirController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         ApiClient::put('supir/' . $request->input('id_supir'), $request->all());
-        return redirect()->route('supir');
+        return redirect()->route('supiredit', $request->input('id_supir'));
     }
 
     public function hapus($id)

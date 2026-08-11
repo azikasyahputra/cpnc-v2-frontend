@@ -100,7 +100,7 @@
                     <a class="page-link" href="#" wire:click.prevent="gotoPage(1)"><i class="bx bx-chevrons-left"></i></a>
                 </li>
                 <li class="page-item {{ $page <= 1 ? 'disabled' : '' }}">
-                    <a class="page-link" href="#" wire:click.prevent="gotoPage({{ $page - 1 }})"><i class="bx bx-chevron-left"></i></a>
+                    <a class="page-link" href="#" wire:click.prevent="gotoPage({{ $page > 1 ? $page - 1 : 1 }})"><i class="bx bx-chevron-left"></i></a>
                 </li>
                 @php
                     $start = max(1, $page - 2);
@@ -113,7 +113,7 @@
                     </li>
                 @endfor
                 <li class="page-item {{ $page >= $lastPage ? 'disabled' : '' }}">
-                    <a class="page-link" href="#" wire:click.prevent="gotoPage({{ $page + 1 }})"><i class="bx bx-chevron-right"></i></a>
+                    <a class="page-link" href="#" wire:click.prevent="gotoPage({{ $page < $lastPage ? $page + 1 : $lastPage }})"><i class="bx bx-chevron-right"></i></a>
                 </li>
                 <li class="page-item {{ $page >= $lastPage ? 'disabled' : '' }}">
                     <a class="page-link" href="#" wire:click.prevent="gotoPage({{ $lastPage }})"><i class="bx bx-chevrons-right"></i></a>

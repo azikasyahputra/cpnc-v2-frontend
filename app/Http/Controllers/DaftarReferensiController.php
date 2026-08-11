@@ -24,8 +24,8 @@ class DaftarReferensiController extends Controller
     public function save(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
-        ApiClient::post('referensi', $request->all());
-        return redirect()->route('daftarreferensi');
+        $payload = ApiClient::post('referensi', $request->all());
+        return redirect()->route('daftarreferensiedit', $payload['data']['id']);
     }
 
     public function edit($id)
@@ -40,7 +40,7 @@ class DaftarReferensiController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         ApiClient::put('referensi/' . $request->input('id_referensi'), $request->all());
-        return redirect()->route('daftarreferensi');
+        return redirect()->route('daftarreferensiedit', $request->input('id_referensi'));
     }
 
     public function hapus($id)

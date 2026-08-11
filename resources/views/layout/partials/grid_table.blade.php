@@ -97,7 +97,32 @@
         @if ($paginator->hasPages() || $from)
         <div class="card-footer d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
             <nav aria-label="Page navigation">
-                {{ $paginator->links() }}
+                @php
+                    $page = $paginator->currentPage();
+                    $lastPage = $paginator->lastPage();
+                    $start = max(1, $page - 2);
+                    $end = min($lastPage, $start + 4);
+                    $start = max(1, $end - 4);
+                @endphp
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item {{ $page <= 1 ? 'disabled' : '' }}">
+                        <a class="page-link" href="{{ $page > 1 ? $paginator->url(1) : '#' }}"><i class="bx bx-chevrons-left"></i></a>
+                    </li>
+                    <li class="page-item {{ $page <= 1 ? 'disabled' : '' }}">
+                        <a class="page-link" href="{{ $page > 1 ? $paginator->url($page - 1) : '#' }}"><i class="bx bx-chevron-left"></i></a>
+                    </li>
+                    @for ($p = $start; $p <= $end; $p++)
+                        <li class="page-item {{ $p === $page ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $paginator->url($p) }}">{{ $p }}</a>
+                        </li>
+                    @endfor
+                    <li class="page-item {{ $page >= $lastPage ? 'disabled' : '' }}">
+                        <a class="page-link" href="{{ $page < $lastPage ? $paginator->url($page + 1) : '#' }}"><i class="bx bx-chevron-right"></i></a>
+                    </li>
+                    <li class="page-item {{ $page >= $lastPage ? 'disabled' : '' }}">
+                        <a class="page-link" href="{{ $page < $lastPage ? $paginator->url($lastPage) : '#' }}"><i class="bx bx-chevrons-right"></i></a>
+                    </li>
+                </ul>
             </nav>
             @if ($from)
                 <small class="text-muted">Showing {{ $from }} - {{ $to }} of {{ $total }}</small>

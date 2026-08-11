@@ -23,7 +23,7 @@ class LaporanPiutangController extends Controller
         $tanggalawal = date('Y-m-d', strtotime($tanggal_awal));
 	    $tanggalakhir = date('Y-m-d', strtotime($tanggal_akhir));
         $nama = 'Laporan Piutang '.$tanggal_awal.' s.d '.$tanggal_akhir;
-        $report = ApiClient::post('reports/piutang', ['tanggal_awal' => $tanggal_awal, 'tanggal_akhir' => $tanggal_akhir]);
+        $report = ApiClient::post('reports/piutang', ['tanggal_awal' => $tanggalawal, 'tanggal_akhir' => $tanggalakhir]);
         $d = $report['data'] ?? [];
         if(!empty($d['data'])){
             switch($download){
@@ -53,7 +53,7 @@ class LaporanPiutangController extends Controller
         $tanggalawal = date('Y-m-d', strtotime($tanggal_awal));
 	    $tanggalakhir = date('Y-m-d', strtotime($tanggal_akhir));
         $nama = 'Laporan Order '.$tanggal_awal.' s.d '.$tanggal_akhir;
-        $report = ApiClient::post('reports/order', ['tanggal_awal' => $tanggal_awal, 'tanggal_akhir' => $tanggal_akhir]);
+        $report = ApiClient::post('reports/order', ['tanggal_awal' => $tanggalawal, 'tanggal_akhir' => $tanggalakhir]);
         $d = $report['data'] ?? [];
         if(count($d['data'] ?? array()) > 1){
             switch($download){
@@ -87,7 +87,7 @@ class LaporanPiutangController extends Controller
         $tanggalawal = date('Y-m-d', strtotime($tanggal_awal));
 	    $tanggalakhir = date('Y-m-d', strtotime($tanggal_akhir));
         $nama = 'Laporan Buku Besar '.$tanggal_awal.' s.d '.$tanggal_akhir;
-        $report = ApiClient::post('reports/piutang-keseluruhan', ['tanggal_awal' => $tanggal_awal, 'tanggal_akhir' => $tanggal_akhir]);
+        $report = ApiClient::post('reports/piutang-keseluruhan', ['tanggal_awal' => $tanggalawal, 'tanggal_akhir' => $tanggalakhir]);
         $d = $report['data'] ?? [];
         switch($download){
             case 'Download Excel':
@@ -123,7 +123,7 @@ class LaporanPiutangController extends Controller
         $tanggalawal = date('Y-m-d', strtotime($tanggal_awal));
 	    $tanggalakhir = date('Y-m-d', strtotime($tanggal_akhir));
         $nama = 'Laporan Laba Rugi '.$tanggal_awal.' s.d '.$tanggal_akhir;
-        $report = ApiClient::post('reports/rugi-laba', ['tanggal_awal' => $tanggal_awal, 'tanggal_akhir' => $tanggal_akhir]);
+        $report = ApiClient::post('reports/rugi-laba', ['tanggal_awal' => $tanggalawal, 'tanggal_akhir' => $tanggalakhir]);
         $d = $report['data'] ?? [];
         if(!empty($d['data'])){
             switch($download){

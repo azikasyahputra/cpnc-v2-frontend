@@ -34,15 +34,15 @@
         }
 
         /* ===== Fixed sections on the preprinted form ===== */
-        .alamat-pelanggan { position: absolute; top: 20px;   left: 0; right: 0; }
-        .no-invoice       { position: absolute; top: 180px;  left: 0; right: 0; }
-        .detail-pelanggan { position: absolute; top: 290px;  left: 0; right: 0; }
-        .bl-no            { position: absolute; top: 310px;  left: 0; right: 0; }
-        .detail-invoice   { position: absolute; top: 400px;  left: 0; right: 0; }
-        .total            { position: absolute; bottom: 250px; left: 0; right: 0; text-align: center; }
-        .terbilang        { position: absolute; bottom: 160px;  left: 0; right: 0; text-align: center; line-height: 1.8; }
-        .tanggal          { position: absolute; bottom: 130px;  left: 0; right: 0; text-align: center; }
-        .footer           { position: absolute; bottom: 20px;     left: 0; right: 0; text-align: center; }
+        .alamat-pelanggan { position: absolute; top: 0;   left: 0; right: 0; }
+        .no-invoice       { position: absolute; top: 130px;  left: 0; right: 0; }
+        .detail-pelanggan { position: absolute; top: 240px;  left: 0; right: 0; }
+        .bl-no            { position: absolute; top: 260px;  left: 0; right: 0; }
+        .detail-invoice   { position: absolute; top: 350px;  left: 0; right: 0; }
+        .total            { position: absolute; bottom: 220px; left: 0; right: 0; text-align: center; }
+        .terbilang        { position: absolute; bottom: 130px;  left: 0; right: 0; text-align: center; line-height: 1.8; }
+        .tanggal          { position: absolute; bottom: 100px;  left: 0; right: 0; text-align: center; }
+        .footer           { position: absolute; bottom: 0;left: 0; right: 0; text-align: center; }
     </style>
 </head>
 <body>

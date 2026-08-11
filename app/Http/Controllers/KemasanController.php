@@ -24,8 +24,8 @@ class KemasanController extends Controller
     public function save(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
-        ApiClient::post('kemasan', $request->all());
-        return redirect()->route('kemasan');
+        $payload = ApiClient::post('kemasan', $request->all());
+        return redirect()->route('kemasanedit', $payload['data']['id']);
     }
 
     public function edit($id)
@@ -40,7 +40,7 @@ class KemasanController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         ApiClient::put('kemasan/'.$request->input('id_kemasan'), $request->all());
-        return redirect()->route('kemasan');
+        return redirect()->route('kemasanedit', $request->input('id_kemasan'));
     }
 
     public function hapus($id)

@@ -24,8 +24,8 @@ class StatusController extends Controller
     public function save(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
-        ApiClient::post('status', $request->all());
-        return redirect()->route('status');
+        $payload = ApiClient::post('status', $request->all());
+        return redirect()->route('statusedit', $payload['data']['id']);
     }
 
     public function edit($id)
@@ -40,7 +40,7 @@ class StatusController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         ApiClient::put('status/' . $request->input('id_status'), $request->all());
-        return redirect()->route('status');
+        return redirect()->route('statusedit', $request->input('id_status'));
     }
 
     public function hapus($id)

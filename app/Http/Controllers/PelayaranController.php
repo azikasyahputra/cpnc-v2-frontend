@@ -24,8 +24,8 @@ class PelayaranController extends Controller
     public function save(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
-        ApiClient::post('pelayaran', $request->all());
-        return redirect()->route('pelayaran');
+        $payload = ApiClient::post('pelayaran', $request->all());
+        return redirect()->route('pelayaranedit', $payload['data']['id']);
     }
 
     public function edit($id)
@@ -40,7 +40,7 @@ class PelayaranController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         ApiClient::put('pelayaran/' . $request->input('id_pelayaran'), $request->all());
-        return redirect()->route('pelayaran');
+        return redirect()->route('pelayaranedit', $request->input('id_pelayaran'));
     }
 
     public function hapus($id)

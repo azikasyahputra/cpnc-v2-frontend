@@ -296,6 +296,7 @@
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-12 mb-3 ">
                                     <br>
+                                    <a href="{{URL::route('invoiceedit',['id'=>$header->id_invoice])}}" class="btn btn-warning">Edit</a>
                                     <a href="{{URL::route('downloadinvoice',['id'=>$header->id_invoice])}}" class="btn btn-success" target="_blank">Print</a>
                                     <a href="{{URL::route('downloadkwitansi',['id'=>$header->id_invoice])}}" class="btn btn-primary" target="_blank">Print Kwitansi</a>
                                     <a href="{{URL::route('invoice')}}" class="btn btn-danger">Kembali</a>

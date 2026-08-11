@@ -24,8 +24,8 @@ class BiayaController extends Controller
     public function save(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
-        ApiClient::post('biaya', $request->all());
-        return redirect()->route('biaya');
+        $payload = ApiClient::post('biaya', $request->all());
+        return redirect()->route('biayaedit', $payload['data']['id']);
     }
 
     public function edit($id)
@@ -40,7 +40,7 @@ class BiayaController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         ApiClient::put('biaya/' . $request->input('id_biaya'), $request->all());
-        return redirect()->route('biaya');
+        return redirect()->route('biayaedit', $request->input('id_biaya'));
     }
 
     public function hapus($id)

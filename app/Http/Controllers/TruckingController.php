@@ -130,8 +130,8 @@ class TruckingController extends Controller
     
     public function save(Request $request){
         date_default_timezone_set('Asia/Jakarta');
-        ApiClient::post('trucking', $request->all());
-        return redirect()->route('trucking');
+        $payload = ApiClient::post('trucking', $request->all());
+        return redirect()->route('truckingdetail', $payload['data']['id']);
     }
     
     public function edit($id){
@@ -148,7 +148,7 @@ class TruckingController extends Controller
     public function saveedit(Request $request){
         date_default_timezone_set('Asia/Jakarta');
         ApiClient::put('trucking/'.$request->input('id_order_trucking'), $request->all());
-        return redirect()->route('trucking');
+        return redirect()->route('truckingdetail', $request->input('id_order_trucking'));
     }
     
     public function lunas($id){
