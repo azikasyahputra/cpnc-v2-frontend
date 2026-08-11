@@ -93,6 +93,20 @@ Route::post('/daftarreferensi/save', 'DaftarReferensiController@save')->name('da
 Route::get('/daftarreferensi/edit/{id}', 'DaftarReferensiController@edit')->name('daftarreferensiedit')->middleware('usersession');
 Route::post('/daftarreferensi/saveedit', 'DaftarReferensiController@saveedit')->name('daftarreferensisaveedit')->middleware('usersession');
 Route::get('/daftarreferensi/hapus/{id}', 'DaftarReferensiController@hapus')->name('daftarreferensihapus')->middleware('usersession');
+//Role
+Route::get('/role', 'RoleController@index')->name('role')->middleware('usersession');
+Route::get('/role/create', 'RoleController@create')->name('rolecreate')->middleware('usersession');
+Route::post('/role/save', 'RoleController@save')->name('rolesave')->middleware('usersession');
+Route::get('/role/edit/{id}', 'RoleController@edit')->name('roleedit')->middleware('usersession');
+Route::post('/role/saveedit', 'RoleController@saveedit')->name('rolesaveedit')->middleware('usersession');
+Route::get('/role/hapus/{id}', 'RoleController@hapus')->name('rolehapus')->middleware('usersession');
+//User
+Route::get('/user', 'UserController@index')->name('user')->middleware('usersession');
+Route::get('/user/create', 'UserController@create')->name('usercreate')->middleware('usersession');
+Route::post('/user/save', 'UserController@save')->name('usersave')->middleware('usersession');
+Route::get('/user/edit/{id}', 'UserController@edit')->name('useredit')->middleware('usersession');
+Route::post('/user/saveedit', 'UserController@saveedit')->name('usersaveedit')->middleware('usersession');
+Route::get('/user/hapus/{id}', 'UserController@hapus')->name('userhapus')->middleware('usersession');
 //Order
 Route::get('/order', 'OrderController@index')->name('order')->middleware('usersession');
 Route::get('/order/group/{sorting}', 'OrderController@sort')->name('ordersorting')->middleware('usersession');

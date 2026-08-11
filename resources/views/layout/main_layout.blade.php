@@ -77,6 +77,12 @@
                     </li>
                     @endif
 
+                    @if(session()->has('role') && session()->get('role') == 'Super Admin')
+                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span></li>
+                    <li class="menu-item {{ request()->is('user*') ? 'active' : '' }}"><a class="menu-link" href="{{ URL::route('user') }}"><div data-i18n="User">User</div></a></li>
+                    <li class="menu-item {{ request()->is('role*') ? 'active' : '' }}"><a class="menu-link" href="{{ URL::route('role') }}"><div data-i18n="Role">Role</div></a></li>
+                    @endif
+
                     @if(session()->has('role') && (session()->get('role') == 'Super Admin' || session()->get('role') == 'Admin'))
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Transaksi</span></li>
                     <li class="menu-item {{ request()->is('order*') ? 'open active' : '' }}">
