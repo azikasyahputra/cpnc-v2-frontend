@@ -37,10 +37,10 @@ class InvoicePdf extends PdfDocument
     const BASELINE_BL_NO = 87.37;
     const BASELINE_DETAIL_ROW1 = 114.74;
     const DETAIL_ROW_STEP = 4.92;
-    const BASELINE_TOTAL = 229.08;
-    const BASELINE_TERBILANG = 248.69;
+    const BASELINE_TOTAL = 227.08;
+    const BASELINE_TERBILANG = 245.69;
     const TERBILANG_STEP = 4.37;
-    const BASELINE_TANGGAL = 260.84;
+    const BASELINE_TANGGAL = 259.84;
     const BASELINE_FOOTER = 289.93;
 
     /** @var object|null */
