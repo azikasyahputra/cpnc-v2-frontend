@@ -43,6 +43,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | PDF Renderer
+    |--------------------------------------------------------------------------
+    |
+    | Default PDF engine used across the application.
+    |   'fpdf'   -> FPDF (fpdf/fpdf) — default
+    |
+    */
+
+    'pdf_renderer' => env('PDF_RENDERER', 'fpdf'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application URL
     |--------------------------------------------------------------------------
     |
@@ -166,7 +178,6 @@ return [
          * Package Service Providers...
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
         /*
          * Application Service Providers...
          */

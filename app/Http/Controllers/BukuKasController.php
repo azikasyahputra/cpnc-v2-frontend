@@ -39,19 +39,7 @@ class BukuKasController extends Controller
     public function downloadinvoice($id){
         date_default_timezone_set('Asia/Jakarta');
         $data = $this->kasData($id);
-        $avatarUrl = public_path('/assets/images/img.png');
-        $arrContextOptions=array(
-                        "ssl"=>array(
-                            "verify_peer"=>false,
-                            "verify_peer_name"=>false,
-                        ),
-                    );
-        $type = pathinfo($avatarUrl, PATHINFO_EXTENSION);
-        $avatarData = file_get_contents($avatarUrl, false, stream_context_create($arrContextOptions));
-        $avatarBase64Data = base64_encode($avatarData);
-        $imageData = 'data:image/' . $type . ';base64,' . $avatarBase64Data;
-        $pdf = PDF::loadView('bukukas.invoicekas',['header'=>$data['header'],'detail'=>$data['detail'],'detailcount'=>$data['detailcount'],'referensi'=>$data['referensi'],'imagedata'=>$imageData]);
-        return $pdf->stream();
+        return PDF::invoiceKas($data);
     }
     
     public function edit($id){

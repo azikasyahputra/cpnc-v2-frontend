@@ -149,7 +149,6 @@ Route::post('/downloadlaporanrugilaba', 'LaporanPiutangController@downloadlapora
 //Laporan keuangan
 Route::get('/laporanbukubesar', 'LaporanKeuanganController@laporanbukubesar')->name('laporanbukubesar')->middleware('usersession');
 Route::post('/downloadlaporanbukubesar', 'LaporanKeuanganController@downloadlaporanbukubesar')->name('downloadlaporanbukubesar')->middleware('usersession');
-Route::post('/downloadlaporanbukubesar/fpdf', 'LaporanKeuanganController@downloadlaporanbukubesarFpdf')->name('downloadlaporanbukubesarfpdf')->middleware('usersession');
 Route::get('/laporanneraca', 'LaporanKeuanganController@laporanneraca')->name('laporanneraca')->middleware('usersession');
 Route::post('/downloadlaporanneraca', 'LaporanKeuanganController@downloadlaporanneraca')->name('downloadlaporanneraca')->middleware('usersession');
 Route::get('/laporanrugilabakeuangan', 'LaporanKeuanganController@laporanrugilabakeuangan')->name('laporanrugilabakeuangan')->middleware('usersession');

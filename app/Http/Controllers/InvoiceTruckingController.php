@@ -106,15 +106,8 @@ class InvoiceTruckingController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $data = $this->invoiceData($id);
-        $header = $data['header']->first();
-        $nama = 'Invoice Trucking '.($header->no_invoice ?? $id);
 
-        $pdf = PDF::loadView('invoicetrucking.invoice', [
-            'header' => $data['header'],
-            'detail' => $data['detail'],
-        ]);
-
-        return $pdf->download(str_replace(['/', '\\'], '-', $nama).'.pdf');
+        return PDF::invoiceTrucking($data);
     }
 
     public function downloadxlsx($id)

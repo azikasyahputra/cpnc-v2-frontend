@@ -31,8 +31,7 @@ class LaporanPiutangController extends Controller
                     return Excel::download(new ArrayExport(array_merge([$d['headings']], $d['data']), $nama, 'Laporan Piutang'), str_replace(['/', '\\'], '-', $nama).'.xlsx');
 
                 case 'Download PDF':
-                    $pdf = PDF::loadView('laporanpiutang.laporanpiutang',['data'=>$d['data'],'tanggalawal'=>$tanggal_awal,'tanggalakhir'=>$tanggal_akhir])->setPaper('a4', 'portrait');
-                    return $pdf->download($nama.'.pdf');
+                    return PDF::laporanPiutang($d['data'], $tanggal_awal, $tanggal_akhir);
               break;
             }
         }else{
@@ -66,8 +65,7 @@ class LaporanPiutangController extends Controller
                     foreach (($d['dokumen'] ?? array()) as $item) {
                         $dokumen[] = (object) $item;
                     }
-                    $pdf = PDF::loadView('laporanpiutang.laporanorder',['data'=>$d['data'],'tanggalawal'=>$tanggal_awal,'tanggalakhir'=>$tanggal_akhir,'header'=>$d['header'] ?? array(),'dokumen'=>$dokumen,'total'=>$d['total'] ?? array()])->setPaper('a4', 'landscape');
-                    return $pdf->download($nama.'.pdf');
+                    return PDF::laporanOrder($d['data'], $tanggal_awal, $tanggal_akhir, $d['header'] ?? array(), $dokumen, $d['total'] ?? array());
               break;
             }
         }else{
@@ -107,8 +105,7 @@ class LaporanPiutangController extends Controller
                 if (isset($dataTotal[3])) {
                     $datatotal[] = array($dataTotal[3], $dataTotal[4], $dataTotal[5]);
                 }
-                $pdf = PDF::loadView('laporanpiutang.laporankeseluruhan',['data'=>$pdfData,'tanggalawal'=>$tanggal_awal,'tanggalakhir'=>$tanggal_akhir,'datatotal'=>$datatotal])->setPaper('a4', 'portrait');
-                return $pdf->download($nama.'.pdf');
+                return PDF::laporanKeseluruhan($pdfData, $tanggal_awal, $tanggal_akhir, $datatotal);
           break;
         }
     }
@@ -134,8 +131,7 @@ class LaporanPiutangController extends Controller
                     return Excel::download(new ArrayExport(array_merge([$d['headings']], $d['data']), $nama, 'Laporan Laba Rugi'), str_replace(['/', '\\'], '-', $nama).'.xlsx');
 
                 case 'Download PDF':
-                    $pdf = PDF::loadView('laporanpiutang.laporanrugilaba',['data'=>$d['data'],'tanggalawal'=>$tanggal_awal,'tanggalakhir'=>$tanggal_akhir])->setPaper('a4', 'portrait');
-                    return $pdf->download($nama.'.pdf');
+                    return PDF::laporanRugiLaba($d['data'], $tanggal_awal, $tanggal_akhir);
               break;
             }
         }else{

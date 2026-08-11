@@ -94,19 +94,8 @@ class InvoiceController extends Controller
      public function downloadinvoice($id){
         date_default_timezone_set('Asia/Jakarta');
         $data = $this->invoiceData($id);
-        $avatarUrl = public_path('/assets/images/img.png');
-        $arrContextOptions=array(
-                        "ssl"=>array(
-                            "verify_peer"=>false,
-                            "verify_peer_name"=>false,
-                        ),
-                    );
-        $type = pathinfo($avatarUrl, PATHINFO_EXTENSION);
-        $avatarData = file_get_contents($avatarUrl, false, stream_context_create($arrContextOptions));
-        $avatarBase64Data = base64_encode($avatarData);
-        $imageData = 'data:image/' . $type . ';base64,' . $avatarBase64Data;
-        $pdf = PDF::loadView('invoice.invoice',['header'=>$data['header'],'detail'=>$data['detail'],'detailcount'=>$data['detailcount'],'biayadetail'=>$data['biayadetail'],'referensi'=>$data['referensi'],'imagedata'=>$imageData]);
-        return $pdf->stream();
+
+        return PDF::invoice($data);
     }
     
      public function downloadkwitansi($id){
@@ -134,8 +123,14 @@ class InvoiceController extends Controller
         $header = $this->objectList($data['header']);
         $biaya = $this->objectList($data['biaya']);
         $referensi = $this->objectList($data['referensi']);
-        $pdf = PDF::loadView('invoice.kwitansi',['header'=>$header,'detail'=>$detail,'detailcount'=>$detailcount,'biayadetail'=>$biaya,'referensi'=>$referensi])->setPaper([0,0,105,281],'landscape');
-        return $pdf->stream();
+
+        return PDF::kwitansi([
+            'header' => $header,
+            'detail' => $detail,
+            'detailcount' => $detailcount,
+            'biayadetail' => $biaya,
+            'referensi' => $referensi,
+        ]);
     }
     
     public function create($id){

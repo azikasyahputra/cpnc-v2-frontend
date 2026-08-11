@@ -44,7 +44,6 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-3 ">
                         <input type="submit" name="download" value="Download Excel" class="btn btn-success">
                         <input type="submit" name="download" value="Download PDF" class="btn btn-warning">
-                        <button type="submit" name="download" value="Download PDF FPDF" formaction="{{URL::route('downloadlaporanbukubesarfpdf')}}" class="btn btn-info">Download PDF (FPDF)</button>
                     </div>
                 </div>
             </form>

@@ -33,8 +33,7 @@ class LaporanTruckingController extends Controller
                     return Excel::download(new ArrayExport(array_merge([$d['headings']], $d['data']), $nama, 'Laporan Piutang'), str_replace(['/', '\\'], '-', $nama).'.xlsx');
 
                 case 'Download PDF':
-                    $pdf = PDF::loadView('laporantrucking.laporanpiutang', ['data' => $d['data'], 'tanggalawal' => $tanggal_awal, 'tanggalakhir' => $tanggal_akhir])->setPaper('a4', 'portrait');
-                    return $pdf->download($nama . '.pdf');
+                    return PDF::truckingPiutang($d['data'], $tanggal_awal, $tanggal_akhir);
                     break;
             }
         } else {
@@ -80,12 +79,7 @@ class LaporanTruckingController extends Controller
                         }
                     }
                     $noinvoice = $invoicetagihan;
-                    $pdf = PDF::loadView('laporantrucking.laporantagihanklien', [
-                        'data' => $pdfData, 'tanggalawal' => $tanggal_awal,
-                        'tanggalakhir' => $tanggal_akhir, 'totalsemua' => $d['totalsemua'] ?? 0,
-                        'nama' => $namaclient, 'noinvoice' => $noinvoice
-                    ])->setPaper('a4', 'portrait');
-                    return $pdf->download($nama . '.pdf');
+                    return PDF::tagihanKlien($pdfData, $tanggal_awal, $tanggal_akhir, $noinvoice, $namaclient, $d['totalsemua'] ?? 0);
                     break;
             }
         } else {
@@ -126,11 +120,7 @@ class LaporanTruckingController extends Controller
                         }
                         $pdfData[] = array($row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9], $row[10], $row[11], $row[0]);
                     }
-                    $pdf = PDF::loadView('laporantrucking.laporanrugilaba', [
-                        'data' => $pdfData, 'tanggalawal' => $tanggal_awal,
-                        'tanggalakhir' => $tanggal_akhir, 'totalsemua' => $d['totalsemua'] ?? 0
-                    ])->setPaper('a4', 'portrait');
-                    return $pdf->download($nama . '.pdf');
+                    return PDF::truckingRugiLaba($pdfData, $tanggal_awal, $tanggal_akhir, $d['totalsemua'] ?? 0);
                     break;
             }
         } else {
@@ -192,15 +182,7 @@ class LaporanTruckingController extends Controller
                         }
                     }
                     $pdfData = count($d['data']) > 9 ? array_slice($d['data'], 0, count($d['data']) - 9) : $d['data'];
-                    $pdf = PDF::loadView('laporantrucking.laporankomisisupir', [
-                        'data' => $pdfData, 'tanggalawal' => $tanggal_awal,
-                        'tanggalakhir' => $tanggal_akhir, 'totalkuranglebih' => $totalkuranglebih,
-                        'totalkomisisupir' => $totalkomisisupir, 'totalkomisikenek' => $totalkomisikenek,
-                        'totalkomisi' => $totalkomisi, 'alasanpemotongan' => $alasanpemotongan,
-                        'biayapemotongan' => $biayapemotongan, 'namasupir' => $namasupir,
-                        'jumlah' => $jumlah
-                    ])->setPaper('legal', 'landscape');
-                    return $pdf->download($nama . '.pdf');
+                    return PDF::komisiSupir($pdfData, $tanggal_awal, $tanggal_akhir, $namasupir, $jumlah, $totalkuranglebih, $totalkomisisupir, $totalkomisikenek, $totalkomisi, $alasanpemotongan, $biayapemotongan);
                     break;
             }
         } else {
