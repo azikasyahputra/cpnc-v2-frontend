@@ -110,7 +110,7 @@
                                             <label for="piutang">Piutang </label>  
                                         </div>   
                                         <div class="col-lg-5 col-md-4 col-sm-4 col-xs-4 mb-3 "> 
-                                            <select id="kode_piutang" name="kode_piutang" class="form-control" required>
+                                            <select id="id_piutang" name="id_piutang" class="form-control" required>
                                                 {!! $option2 !!}
                                             </select>
                                         </div>
@@ -124,7 +124,7 @@
                                             <label for="kas">Kas </label>  
                                         </div>   
                                         <div class="col-lg-5 col-md-4 col-sm-4 col-xs-4 mb-3 "> 
-                                            <select id="kode_kas" name="kode_kas" class="form-control" required>
+                                            <select id="id_kas" name="id_kas" class="form-control" required>
                                             {!! $option2 !!}
                                             </select>
                                         </div>
