@@ -91,7 +91,7 @@
                         <tbody>
                             @foreach($rows as $index => $row)
                             <tr>
-                                <td class="text-center">{{ $index + 1 }}</td>
+                                <td class="text-center no">{{ $index + 1 }}</td>
                                 <td>
                                     <input type="hidden" name="detail[{{$index}}][id_order_trucking]" value="{{ $row->id_order_trucking ?? '' }}" />
                                     <?php $tgl = isset($row->tanggal_order) && $row->tanggal_order ? date('d/m/Y', strtotime($row->tanggal_order)) : ''; ?>
@@ -205,7 +205,9 @@
     }
 
     function hitungSemua() {
-        var rows = document.getElementById("detailTable").getElementsByTagName('tbody')[0].rows;
+        var table = document.getElementById("detailTable");
+        if (!table) return;
+        var rows = table.getElementsByTagName('tbody')[0].rows;
         renomerBaris();
         var totalOngkos = 0, totalBongkar = 0, totalLiftoff = 0, totalTagihan = 0;
         for (var i = 0; i < rows.length; i++) {
@@ -218,8 +220,10 @@
                 if (name.indexOf('[lift_off]') !== -1) liftoff = parseFloat(cells[j].value) || 0;
             }
             var tagihan = ongkos + bongkar + liftoff;
-            rows[i].getElementsByClassName('tagihan')[0].innerText = tagihan.toLocaleString('id-ID');
-            rows[i].getElementsByClassName('no')[0].innerText = i + 1;
+            var cellTagihan = rows[i].getElementsByClassName('tagihan')[0];
+            var cellNo = rows[i].getElementsByClassName('no')[0];
+            if (cellTagihan) cellTagihan.innerText = tagihan.toLocaleString('id-ID');
+            if (cellNo) cellNo.innerText = i + 1;
             totalOngkos += ongkos; totalBongkar += bongkar; totalLiftoff += liftoff; totalTagihan += tagihan;
         }
         document.getElementById("totalOngkos").innerText = totalOngkos.toLocaleString('id-ID');

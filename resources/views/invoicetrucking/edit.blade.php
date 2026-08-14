@@ -203,8 +203,10 @@
                 if (name.indexOf('[lift_off]') !== -1) liftoff = parseFloat(cells[j].value) || 0;
             }
             var tagihan = ongkos + bongkar + liftoff;
-            rows[i].getElementsByClassName('tagihan')[0].innerText = tagihan.toLocaleString('id-ID');
-            rows[i].getElementsByClassName('no')[0].innerText = i + 1;
+            var cellTagihan = rows[i].getElementsByClassName('tagihan')[0];
+            var cellNo = rows[i].getElementsByClassName('no')[0];
+            if (cellTagihan) cellTagihan.innerText = tagihan.toLocaleString('id-ID');
+            if (cellNo) cellNo.innerText = i + 1;
             totalOngkos += ongkos; totalBongkar += bongkar; totalLiftoff += liftoff; totalTagihan += tagihan;
         }
         document.getElementById("totalOngkos").innerText = totalOngkos.toLocaleString('id-ID');
