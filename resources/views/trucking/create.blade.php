@@ -148,6 +148,9 @@ $(function() {
     $('input[name="tanggal_order"]').daterangepicker({
         singleDatePicker: true,
         showDropdowns: true,
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
     });
 });
 </script>

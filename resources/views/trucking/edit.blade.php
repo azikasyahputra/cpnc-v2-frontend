@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-3 ">
                             <label for="tanggal_order">Tanggal Order* :</label>
-                            <?php $tanggal_order=DateTime::createFromFormat('Y-m-d', $data->tanggal_order); $tanggal_order=$tanggal_order->format('m/d/Y'); ?>
+                            <?php $tanggal_order=DateTime::createFromFormat('Y-m-d', $data->tanggal_order); $tanggal_order=$tanggal_order->format('Y-m-d'); ?>
                             <input type="text" id="tanggal_order" class="form-control" name="tanggal_order" value="{{$tanggal_order}}" required />
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-3 ">
@@ -142,6 +142,9 @@ $(function() {
     $('input[name="tanggal_order"]').daterangepicker({
         singleDatePicker: true,
         showDropdowns: true,
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
     });
 });
 </script>
