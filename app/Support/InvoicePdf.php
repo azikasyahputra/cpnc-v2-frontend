@@ -31,17 +31,17 @@ class InvoicePdf extends PdfDocument
     const W_TERBILANG = 98.70;
 
     // Baselines (mm from page top).
-    const BASELINE_NO_INVOICE = 51.66;
+    const BASELINE_NO_INVOICE = 49.66;
     const BASELINE_DETAIL_PELANGGAN1 = 80.76;
     const BASELINE_DETAIL_PELANGGAN2 = 86.05;
     const BASELINE_BL_NO = 87.37;
-    const BASELINE_DETAIL_ROW1 = 114.74;
+    const BASELINE_DETAIL_ROW1 = 118.74;
     const DETAIL_ROW_STEP = 4.92;
-    const BASELINE_TOTAL = 227.08;
-    const BASELINE_TERBILANG = 245.69;
+    const BASELINE_TOTAL = 240.08;
+    const BASELINE_TERBILANG = 255.69;
     const TERBILANG_STEP = 4.37;
-    const BASELINE_TANGGAL = 259.84;
-    const BASELINE_FOOTER = 289.93;
+    const BASELINE_TANGGAL = 272.84;
+    const BASELINE_FOOTER = 300.93;
 
     /** @var object|null */
     protected $inv;
@@ -60,7 +60,8 @@ class InvoicePdf extends PdfDocument
 
     public function __construct(array $data)
     {
-        parent::__construct('P', 'A4');
+        // parent::__construct('P', 'A4');
+        parent::__construct('P', ['210','310']);
         $this->SetMargins(0, 0, 0);
         $this->SetAutoPageBreak(false);
         $this->SetFont('Helvetica', '', 10.5);
